@@ -1,5 +1,5 @@
 <template>
-    <div class="font-mono">
+    <div class="">
         <NuxtLayout>
             <NuxtPage />
         </NuxtLayout>
@@ -44,6 +44,10 @@
   .page-enter-from,
   .page-leave-to {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateY(50px);
+  }
+  body {
+    font-family: 'Proxima Nova', sans-serif;
+    background-color: #D7E3E6;
   }
 </style>

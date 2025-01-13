@@ -34,7 +34,7 @@ export default defineNuxtConfig({
         pass: process.env.EMAIL_PASS,
       },
     },
-  }], '@pinia/nuxt', '@nuxt/icon'],
+  }], '@pinia/nuxt', '@nuxt/icon', '@nuxt/fonts', '@vueuse/motion/nuxt'],
   mail: {
     message: {
       to: process.env.EMAIL_USER,

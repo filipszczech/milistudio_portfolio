@@ -10,11 +10,13 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/fonts": "^0.10.3",
     "@nuxt/icon": "^1.5.6",
     "@nuxt/image": "^1.8.1",
     "@nuxtjs/supabase": "^1.4.1",
     "@pinia/nuxt": "^0.5.5",
-    "nuxt": "^3.13.0",
+    "@vueuse/motion": "^2.2.6",
+    "nuxt": "^3.15.1",
     "nuxt-mail": "^5.1.1",
     "pinia": "^2.2.4",
     "vue": "latest",
