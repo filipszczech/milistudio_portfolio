@@ -1,8 +1,8 @@
 <template>
     <div>
         <header>
-            <nav class="fixed top-0 w-full text-mili_dark_blue z-50">
-                <div class="w-full flex justify-between items-center py-8 px-12">
+            <nav class="w-full text-mili_dark_blue z-50">
+                <div class="w-full flex justify-between items-center py-8 px-4 sm:px-6 lg:px-8">
                     <NuxtLink to="/">
                         <img class="h-7" src="/img/mili.png" alt="mili logo"/>
                     </NuxtLink>
@@ -11,20 +11,20 @@
                         <Icon name="mdi:hamburger-menu" style="color: black" size="1.5rem" />
                     </div>
                     <!-- Navigation links for larger screens -->
-                    <ul class="navbar-links hidden lg:flex gap-9 xl:gap-12">
+                    <ul class="navbar-links hidden lg:flex gap-9">
                         <NuxtLink to="/">
-                            <li @mouseover="isPortfolioOpen = true" @mouseleave="isPortfolioOpen = false" class="relative p-1 text-test">
+                            <li @mouseover="isPortfolioOpen = true" @mouseleave="isPortfolioOpen = false" class="relative py-1 box-border">
                                 <div class="flex gap-2 items-center font-semibold">
                                     <p>portfolio</p>
                                     <Icon class="transition-all duration-300" :class="{ 'rotate-180': isPortfolioOpen }" name="gridicons:chevron-down" style="color: black" />
                                 </div>
-                                <ul v-if="isPortfolioOpen" class="absolute top-full"
+                                <ul v-if="isPortfolioOpen" class="absolute top-full bg-white z-50"
                                     v-motion
                                     :initial="{ opacity: 0, y: -30 }"
                                     :enter="{ opacity: 1, y: 0 }"
                                     :leave="{ opacity: 0, y: -30 }"
                                     :duration="400">
-                                    <li v-for="(category) in categories" :key="category.id" class="py-2">
+                                    <li v-for="(category) in categories" :key="category.id" class="py-1 px-2">
                                         <NuxtLink :to="'/' + category.slug">
                                             <p>{{ category.name }}</p>
                                         </NuxtLink>
@@ -41,7 +41,7 @@
                 </div>
                 <!-- Slide-out menu for small screens -->
                 <transition name="slide-down">
-                    <ul v-if="isMenuOpen" class="flex flex-col justify-center items-end gap-4 lg:hidden py-4">
+                    <ul v-if="isMenuOpen" class="flex flex-col justify-center items-end gap-4 lg:hidden py-4 pr-8">
                         <p>portfolio</p>
                         <p>o mnie</p>
                     </ul>

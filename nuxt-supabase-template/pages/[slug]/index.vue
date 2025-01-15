@@ -89,7 +89,7 @@
     const categories = ref([
         { id: 1, name: 'Portret', slug: 'portret', img: '/img/portret.jpg' },
         { id: 2, name: 'Architektura', slug: 'architektura', img: '/img/architektura3.jpg' },
-        { id: 3, name: 'Footografia kulinarna', slug: 'fotografia-kulinarna', img: '/img/jedzenie.jpg' },
+        { id: 3, name: 'Fotografia kulinarna', slug: 'fotografia-kulinarna', img: '/img/jedzenie.jpg' },
         { id: 4, name: 'stills', slug: 'stills',  img: '/img/stills.jpg' },
         { id: 5, name: 'inne', slug: 'inne',  img: '/img/inne.jpg' },
     ]);

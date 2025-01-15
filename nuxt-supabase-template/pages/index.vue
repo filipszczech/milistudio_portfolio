@@ -33,9 +33,9 @@
             </div> -->
             <ClientOnly>
                 <swiper-container 
-                    class="mt-12 2xl:mt-24 w-full"
+                    class="mt-5 md:mt-12 2xl:mt-24 w-full"
                     slides-per-view="4"
-                    space-between="24" 
+                    space-between="32" 
                     autoplay="true"
                     mousewheel="true"
                     free-mode="true"
@@ -46,7 +46,7 @@
                         1200: { slidesPerView: 3 },
                         1536: { slidesPerView: 4 }
                     }"
-                    style="--swiper-pagination-color: black; --swiper-pagination-bottom: 12px;">
+                    style="--swiper-pagination-color: black; --swiper-pagination-bottom: 0px;">
                     <swiper-slide v-for="(category, categoryId) in categories" :key="category.id" class="mb-12">
                         <NuxtLink :to="'/' + category.slug">
                             <CategoryCard
@@ -66,9 +66,9 @@
     const categories = ref([
         { id: 1, name: 'portret', slug: 'portret', img: '/img/portret.jpg' },
         { id: 2, name: 'architektura', slug: 'architektura', img: '/img/architektura3.jpg' },
-        { id: 3, name: 'footografia kulinarna', slug: 'fotografia-kulinarna', img: '/img/jedzenie.jpg' },
+        { id: 3, name: 'fotografia kulinarna', slug: 'fotografia-kulinarna', img: '/img/jedzenie.jpg' },
         { id: 4, name: 'stills', slug: 'stills',  img: '/img/stills.jpg' },
-        { id: 5, name: 'inne', slug: 'inne',  img: '/img/inne.jpg' },
+        // { id: 5, name: 'inne', slug: 'inne',  img: '/img/inne.jpg' },
     ]);
     // const categories = ref([
     //     { id: 1, name: 'Jedzenie', slug: 'jedzenie', img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/czarnogora%202024/czg1.jpg' },
