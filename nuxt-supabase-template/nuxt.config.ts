@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: process.env.ENABLE_DEVTOOLS === 'true' },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag === 'swiper-container' || tag === 'swiper-slide',
+    },
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
@@ -23,7 +28,13 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' }
-      ]
+      ],
+      script: [
+        {
+          src: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js",
+          defer: true,
+        },
+      ],
     }
   },
   modules: ['@nuxtjs/supabase', '@nuxtjs/tailwindcss', '@nuxt/image', ['nuxt-mail', {

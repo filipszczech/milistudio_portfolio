@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="font-mono">
         <NuxtLayout>
             <NuxtPage />
         </NuxtLayout>
@@ -47,7 +47,7 @@
     transform: translateY(50px);
   }
   body {
-    font-family: 'Proxima Nova', sans-serif;
-    background-color: #D7E3E6;
+    font-family: 'itc benguiat';
+    background-color: white;
   }
 </style>

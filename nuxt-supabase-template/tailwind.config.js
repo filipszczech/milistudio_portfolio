@@ -5,7 +5,7 @@ export default {
       extend: {
         colors: {
           mili_light_blue: '#D7E3E6',
-          mili_dark_blue: '#003D61',
+          mili_dark_blue: '#000',
         }
       },
     },

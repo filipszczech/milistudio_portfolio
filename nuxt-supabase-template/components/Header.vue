@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            <nav class="fixed top-0 w-full bg-mili_light_blue text-mili_dark_blue z-50">
+            <nav class="fixed top-0 w-full text-mili_dark_blue z-50">
                 <div class="w-full flex justify-between items-center py-8 px-12">
                     <NuxtLink to="/">
                         <img class="h-7" src="/img/mili.png" alt="mili logo"/>
@@ -13,7 +13,7 @@
                     <!-- Navigation links for larger screens -->
                     <ul class="navbar-links hidden lg:flex gap-9 xl:gap-12">
                         <NuxtLink to="/">
-                            <li @mouseover="isPortfolioOpen = true" @mouseleave="isPortfolioOpen = false" class="relative py-1">
+                            <li @mouseover="isPortfolioOpen = true" @mouseleave="isPortfolioOpen = false" class="relative p-1 text-test">
                                 <div class="flex gap-2 items-center font-semibold">
                                     <p>portfolio</p>
                                     <Icon class="transition-all duration-300" :class="{ 'rotate-180': isPortfolioOpen }" name="gridicons:chevron-down" style="color: black" />
@@ -25,7 +25,7 @@
                                     :leave="{ opacity: 0, y: -30 }"
                                     :duration="400">
                                     <li v-for="(category) in categories" :key="category.id" class="py-2">
-                                        <NuxtLink :to="'/category/' + category.slug">
+                                        <NuxtLink :to="'/' + category.slug">
                                             <p>{{ category.name }}</p>
                                         </NuxtLink>
                                     </li>
@@ -85,5 +85,9 @@
 
     .navbar-links .router-link-exact-active {
         border-bottom: 1px solid #003D61;
+    }
+    .text-test {
+        background: rgba(255, 255, 255, 0.1); /* Półprzezroczyste tło */
+        backdrop-filter: blur(3px);
     }
 </style>
