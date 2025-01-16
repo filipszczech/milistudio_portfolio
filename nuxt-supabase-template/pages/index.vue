@@ -54,11 +54,3 @@
         },
     });
 </script>
-
-<style scoped>
-    .text-test {
-        font-family: 'Playfair Display', serif;
-        background: rgba(255, 255, 255, 0.2); /* Półprzezroczyste tło */
-        backdrop-filter: blur(10px);
-    }
-</style>
