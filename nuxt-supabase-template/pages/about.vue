@@ -9,4 +9,14 @@
 </template>
 
 <script setup>
+    useHead({
+        title: "Milistudio | o nas",
+        meta: [
+            { name: 'description', content: 'Milistudio - informacje o nas.' },
+            { property: 'og:description', content: 'Milistudio - informacje o nas.' },
+        ],
+        htmlAttrs: {
+            lang: 'pl'
+        },
+    });
 </script>

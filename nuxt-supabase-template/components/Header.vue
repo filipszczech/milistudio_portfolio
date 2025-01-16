@@ -11,10 +11,10 @@
                         <Icon name="mdi:hamburger-menu" style="color: black" size="1.5rem" />
                     </div>
                     <!-- Navigation links for larger screens -->
-                    <ul class="navbar-links hidden lg:flex gap-9">
+                    <ul class="navbar-links hidden lg:flex gap-6">
                         <NuxtLink to="/">
                             <li @mouseover="isPortfolioOpen = true" @mouseleave="isPortfolioOpen = false" class="relative py-1 box-border">
-                                <div class="flex gap-2 items-center font-semibold">
+                                <div class="flex gap-2 items-center px-2">
                                     <p>portfolio</p>
                                     <Icon class="transition-all duration-300" :class="{ 'rotate-180': isPortfolioOpen }" name="gridicons:chevron-down" style="color: black" />
                                 </div>
@@ -33,7 +33,7 @@
                             </li>
                         </NuxtLink>
                         <NuxtLink to="/about">
-                            <li class="font-semibold py-1">
+                            <li class="py-1 px-2">
                                 <p>o mnie</p>
                             </li>
                         </NuxtLink>
@@ -41,9 +41,17 @@
                 </div>
                 <!-- Slide-out menu for small screens -->
                 <transition name="slide-down">
-                    <ul v-if="isMenuOpen" class="flex flex-col justify-center items-end gap-4 lg:hidden py-4 pr-8">
-                        <p>portfolio</p>
-                        <p>o mnie</p>
+                    <ul v-if="isMenuOpen" class="navbar-links flex flex-col justify-center items-end gap-4 lg:hidden pb-2 px-4 sm:px-6">
+                        <NuxtLink to="/">
+                            <li class="">
+                                <p>portfolio</p>
+                            </li>
+                        </NuxtLink>
+                        <NuxtLink to="/about">
+                            <li class="">
+                                <p>o mnie</p>
+                            </li>
+                        </NuxtLink>
                     </ul>
                 </transition>
             </nav>
@@ -56,16 +64,11 @@
     const toggleMenu = () => {
         isMenuOpen.value = !isMenuOpen.value;
     }
-    const handleLeave = (el, done) => {
-      setTimeout(done, 400);
-    }
     const isPortfolioOpen = ref(false);
-    const categories = ref([
-        { id: 1, name: 'Jedzenie', slug: 'jedzenie', img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/czarnogora%202024/czg1.jpg' },
-        { id: 2, name: 'Portrety', slug: 'portret', img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/czarnogora%202024/0007_4A_konkurs.jpeg' },
-        { id: 3, name: 'Dokument', slug: 'dokument', img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/balkany%20chlopaki/chlopaki2.jpg' },
-        { id: 4, name: 'Architektura', slug: 'architektura',  img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/street%20portraits/60860014.jpg' },
-    ]);
+    const photosStore = usePhotosStore();
+    const categories = ref([]);
+    await photosStore.fetchCategories();
+    categories.value = photosStore.categories;
 </script>
 
 <style scoped>

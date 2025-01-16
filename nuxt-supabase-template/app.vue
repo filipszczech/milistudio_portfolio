@@ -9,11 +9,12 @@
 <script setup>
     useHead({
       meta: [
-        { name: "description", content: '' },
+        { name: "title", content: 'Milistudio - portfolio fotograficzne' },
+        { name: "description", content: 'Strona prezentuje portfolio studia fotograficznego Milistudio.' },
         { property: 'og:url', content: '' },
-        { property: 'og:title', content: '' },
-        { property: 'og:description', content: '' },
-        { property: 'og:image', content: '' },
+        { property: 'og:title', content: 'Milistudio - portfolio fotograficzne' },
+        { property: 'og:description', content: 'Strona prezentuje portfolio studia fotograficznego Milistudio.' },
+        { property: 'og:image', content: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/mili/portret5.jpg' },
         { property: 'og:type', content: 'website' },
 
         { name: 'twitter:title', content: '' },

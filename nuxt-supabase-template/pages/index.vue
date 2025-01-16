@@ -32,51 +32,27 @@
                 </div>
             </div> -->
             <ClientOnly>
-                <swiper-container 
-                    class="mt-5 md:mt-12 2xl:mt-24 w-full"
-                    slides-per-view="4"
-                    space-between="32" 
-                    autoplay="true"
-                    mousewheel="true"
-                    free-mode="true"
-                    :pagination="{ clickable: true }"
-                    :breakpoints="{
-                        320: { slidesPerView: 1 },
-                        740: { slidesPerView: 2 },
-                        1200: { slidesPerView: 3 },
-                        1536: { slidesPerView: 4 }
-                    }"
-                    style="--swiper-pagination-color: black; --swiper-pagination-bottom: 0px;">
-                    <swiper-slide v-for="(category, categoryId) in categories" :key="category.id" class="mb-12">
-                        <NuxtLink :to="'/' + category.slug">
-                            <CategoryCard
-                                v-motion
-                                :initial="{ opacity: 0, y: 20 }"
-                                :enter="{ opacity: 1, y: 0 }"
-                                :duration="600" :delay="200*categoryId" :category="category" />
-                        </NuxtLink>
-                    </swiper-slide>
-                </swiper-container>
+                <CategorySlider :categories="categories" />
             </ClientOnly>
         </PageContent>
     </div>
 </template>
 
 <script setup>
-    const categories = ref([
-        { id: 1, name: 'portret', slug: 'portret', img: '/img/portret.jpg' },
-        { id: 2, name: 'architektura', slug: 'architektura', img: '/img/architektura3.jpg' },
-        { id: 3, name: 'fotografia kulinarna', slug: 'fotografia-kulinarna', img: '/img/jedzenie.jpg' },
-        { id: 4, name: 'stills', slug: 'stills',  img: '/img/stills.jpg' },
-        // { id: 5, name: 'inne', slug: 'inne',  img: '/img/inne.jpg' },
-    ]);
-    // const categories = ref([
-    //     { id: 1, name: 'Jedzenie', slug: 'jedzenie', img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/czarnogora%202024/czg1.jpg' },
-    //     { id: 2, name: 'Portrety', slug: 'portret', img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/balkany%20chlopaki/chlopaki1.jpg' },
-    //     { id: 3, name: 'Dokument', slug: 'dokument', img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/balkany%20chlopaki/chlopaki2.jpg' },
-    //     { id: 4, name: 'Inne', slug: 'architektura',  img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/architektura/kolorki.jpg' },
-    //     { id: 5, name: 'Architektura', slug: 'architektura',  img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/architektura/kolorki.jpg' },
-    //     ]);
+    const photosStore = usePhotosStore();
+    const categories = ref([]);
+    await photosStore.fetchCategories();
+    categories.value = photosStore.categories;
+
+    useHead({
+        title: "Milistudio",
+        meta: [
+            { name: 'description', content: 'Strona prezentuje portfolio studia fotograficznego Milistudio.' }
+        ],
+        htmlAttrs: {
+            lang: 'pl',
+        },
+    });
 </script>
 
 <style scoped>

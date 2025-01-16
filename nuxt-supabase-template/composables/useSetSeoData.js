@@ -3,17 +3,17 @@ export function useSetSeoData({ title, description, image = '', type='' }) {
     const formattedTitle = title.toLowerCase();
   
     useHead({
-      title: `Website | ${formattedTitle}`,
+      title: `Milistudio | ${formattedTitle}`,
     });
   
     useSeoMeta({
-      description: `Website - ${description}`,
-      ogTitle: `Website.pl - ${formattedTitle}`,
-      ogDescription: `Zobacz ${formattedTitle} na stronie Website.`,
+      description: `Milistudio - ${description}`,
+      ogTitle: `${formattedTitle}`,
+      ogDescription: `Milistudio - ${description}`,
       ogImage: image,
       ogUrl: `https://website.pl${route.fullPath}`,
-      twitterTitle: `Website - ${type}: ${formattedTitle}`,
-      twitterDescription: `Website - ${description}`,
+      twitterTitle: formattedTitle,
+      twitterDescription: `Milistudio - ${description}`,
       twitterImage: image,
       twitterCard: 'summary_large_image',
     });

@@ -2,12 +2,19 @@
     <div class="">
         <PageContent v-if="category">
             <div class="max-w-7xl mx-auto">
-                <div class="mb-6 lg:mb-12 text-mili_dark_blue text-center">
+                <div class="mb-6 lg:mb-9 text-mili_dark_blue text-center">
                     <h1 class="text-4xl md:text-6xl font-semibold">{{ category.name }}</h1>
-                    <p class="mt-6 text-lg">Opis kategorii zdjęć. Jakaś historia,informacje i w ogóle.</p>
+                    <p class="mt-3 text-lg">Opis kategorii zdjęć. Jakaś historia,informacje i w ogóle.</p>
                 </div>
-                <div class="columns-1 sm:columns-2 md:columns-3 gap-6">
-                    <div class="w-full bg-red-400 h-96 break-inside-avoid mb-6"
+                <div v-if="photos.length > 0" class="columns-1 sm:columns-2 md:columns-3 gap-6">
+                    <div v-for="photo in photos" :key="photo.id" class="w-full break-inside-avoid mb-6"
+                            v-motion
+                            :initial="{ opacity: 0, y: 30 }"
+                            :visibleOnce="{ opacity: 1, y: 0 }"
+                            :duration="600">
+                        <img :src="photo.src" :alt="'zdjęcie: ' + photo.name" class="w-full object-cover" />
+                    </div>
+                    <!-- <div class="w-full bg-red-400 h-96 break-inside-avoid mb-6"
                             v-motion
                             :initial="{ opacity: 0, y: 20 }"
                             :visibleOnce="{ opacity: 1, y: 0 }"
@@ -76,7 +83,7 @@
                             v-motion
                             :initial="{ opacity: 0, y: 20 }"
                             :visibleOnce="{ opacity: 1, y: 0 }"
-                            :duration="600"></div>
+                            :duration="600"></div> -->
                 </div>
             </div>
         </PageContent>
@@ -85,21 +92,31 @@
 
 <script setup>
     import { useRoute } from 'vue-router';
-    import { ref, computed } from 'vue';
-    const categories = ref([
-        { id: 1, name: 'Portret', slug: 'portret', img: '/img/portret.jpg' },
-        { id: 2, name: 'Architektura', slug: 'architektura', img: '/img/architektura3.jpg' },
-        { id: 3, name: 'Fotografia kulinarna', slug: 'fotografia-kulinarna', img: '/img/jedzenie.jpg' },
-        { id: 4, name: 'stills', slug: 'stills',  img: '/img/stills.jpg' },
-        { id: 5, name: 'inne', slug: 'inne',  img: '/img/inne.jpg' },
-    ]);
-
+    import { ref } from 'vue';
     const route = useRoute();
     const slug = route.params.slug;
+    const photosStore = usePhotosStore();
+    const category = ref(null);
+    const photos = ref([]);
+    category.value = await photosStore.fetchCategory(slug);
+    await photosStore.fetchPhotos(category.value.id);
+    photos.value = photosStore.photos;
+    if(category) {
+        useSetSeoData({
+            title: category.value.name,
+            description: `Zdjęcia z kategorii ${category.value.name}.`,
+            image: category.value.img,
+            url: `/${category.value.slug}`
+        });
+    }
+    if (!category) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'Nie znaleziono kategorii o takiej nazwie.',
+            fatal: true
+        });
+    };
 
-    const category = computed(() =>
-        categories.value.find((cat) => cat.slug === slug)
-    );
 </script>
 
 <style scoped>
