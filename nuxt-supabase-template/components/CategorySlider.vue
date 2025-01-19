@@ -1,6 +1,6 @@
 <template>
     <div>
-        <swiper-container 
+        <!-- <swiper-container 
             class="mt-5 md:mt-12 2xl:mt-24 w-full min-h-[32rem]"
             slides-per-view="4"
             space-between="32" 
@@ -24,7 +24,20 @@
                         :duration="600" :delay="200*categoryId" :category="category" />
                 </NuxtLink>
             </swiper-slide>
-        </swiper-container>
+        </swiper-container> -->
+        <div class="mt-5 md:mt-12 2xl:mt-24 w-full min-h-[32rem]">
+            <div class="grid gap-6 lg:gap-6 grid-cols-2 md:grid-cols-2 2xl:grid-cols-4 2xl:mt-32">
+                <div v-for="(category, categoryId) in categories" :key="category.id">
+                    <NuxtLink :to="'/' + category.slug">
+                        <CategoryCard
+                            v-motion
+                            :initial="{ opacity: 0, y: 20 }"
+                            :visibleOnce="{ opacity: 1, y: 0 }"
+                            :duration="600" :delay="200*categoryId" :category="category" />
+                    </NuxtLink>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

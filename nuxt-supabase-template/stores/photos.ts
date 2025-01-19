@@ -40,6 +40,18 @@ export const usePhotosStore = defineStore('photos', {
             } finally {
                 this.photosPending = false;
             }
+        },
+        getNextCategory(categorySlug: string) {
+            if (!this.categories || this.categories.length === 0) return null; 
+            const currentIndex = this.categories.findIndex((category) => category.slug === categorySlug);
+            if (currentIndex === -1) return null;
+            return this.categories[currentIndex + 1] || this.categories[0];
+        },
+        getPreviousCategory(categorySlug: string) {
+            if (!this.categories || this.categories.length === 0) return null; 
+            const currentIndex = this.categories.findIndex((category) => category.slug === categorySlug);
+            if (currentIndex === -1) return null;
+            return this.categories[currentIndex - 1] || this.categories[this.categories.length - 1];
         }
     },
 });

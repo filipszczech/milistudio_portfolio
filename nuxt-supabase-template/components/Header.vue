@@ -2,9 +2,27 @@
     <div>
         <header>
             <nav class="w-full text-mili_dark_blue z-50">
-                <div class="w-full flex justify-between items-center py-8 px-4 sm:px-6 lg:px-8">
+                <div class="w-full flex justify-between items-center py-8 px-4 sm:px-6 lg:px-8" 
+                    v-motion
+                    :initial="{
+                        opacity: 0,
+                        y: -30,
+                    }"
+                    :visible="{
+                        opacity: 1,
+                        y: 0,
+                    }"
+                    :duration="500">
                     <NuxtLink to="/">
-                        <img class="h-7" src="/img/mili.png" alt="mili logo"/>
+                        <img class="h-7" src="/img/mili.png" alt="mili logo"
+                            v-motion
+                            :initial="{
+                                scale: 0.7,
+                            }"
+                            :visible="{
+                                scale: 1,
+                            }"
+                            :duration="500"/>
                     </NuxtLink>
                     <!-- Hamburger menu icon for small screens -->
                     <div class="lg:hidden hover-scale-105 cursor-pointer" @click="toggleMenu">
