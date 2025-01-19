@@ -1,5 +1,5 @@
 <template>
-    <div class="relative h-80 md:h-[32rem] w-full cursor-pointer overflow-hidden transform hover:translate-y-5"
+    <div class="relative h-64 sm:h-80 md:h-[32rem] w-full cursor-pointer overflow-hidden transform hover:translate-y-5"
         @mouseenter="hover = true"
         @mouseleave="hover = false">
         <img class="w-full h-full object-cover hover:opacity-60 transition-all duration-500 bg-white" :src="category.img" :alt="category.name"/>

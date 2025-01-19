@@ -26,7 +26,7 @@
             </swiper-slide>
         </swiper-container> -->
         <div class="mt-5 md:mt-12 2xl:mt-24 w-full min-h-[32rem]">
-            <div class="grid gap-6 lg:gap-6 grid-cols-2 md:grid-cols-2 2xl:grid-cols-4 2xl:mt-32">
+            <div class="grid gap-3 md:gap-6 grid-cols-2 md:grid-cols-2 2xl:grid-cols-4 2xl:mt-32">
                 <div v-for="(category, categoryId) in categories" :key="category.id">
                     <NuxtLink :to="'/' + category.slug">
                         <CategoryCard
