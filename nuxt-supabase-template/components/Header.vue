@@ -60,16 +60,16 @@
                 <!-- Slide-out menu for small screens -->
                 <transition name="slide-down">
                     <ul v-if="isMenuOpen" class="navbar-links flex flex-col justify-center items-end gap-4 lg:hidden pb-2 px-4 sm:px-6">
-                        <NuxtLink to="/">
-                            <li class="">
+                        <li class="">
+                            <NuxtLink to="/">
                                 <p>portfolio</p>
-                            </li>
-                        </NuxtLink>
-                        <NuxtLink to="/about">
-                            <li class="">
-                                <p>o mnie</p>
-                            </li>
-                        </NuxtLink>
+                            </NuxtLink>
+                        </li>
+                        <li class="">
+                            <NuxtLink to="/about">
+                                <p>o nas</p>
+                            </NuxtLink>
+                        </li>
                     </ul>
                 </transition>
             </nav>

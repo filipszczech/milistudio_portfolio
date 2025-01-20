@@ -19,10 +19,10 @@ export default defineNuxtConfig({
         { property: 'og:image', content: '' },
         { property: 'og:type', content: 'website' },
 
-        { name: 'twitter:title', content: 'title' },
-        { name: 'twitter:description', content: 'twitter desc' },
-        { name: 'twitter:image', content: '' },
-        { name: 'twitter:card', content: 'summary' },
+        // { name: 'twitter:title', content: 'title' },
+        // { name: 'twitter:description', content: 'twitter desc' },
+        // { name: 'twitter:image', content: '' },
+        // { name: 'twitter:card', content: 'summary' },
 
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }
       ],

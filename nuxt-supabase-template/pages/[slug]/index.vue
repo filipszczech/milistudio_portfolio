@@ -12,20 +12,18 @@
                             :initial="{ opacity: 0, y: 30 }"
                             :visibleOnce="{ opacity: 1, y: 0 }"
                             :duration="600">
-                        <img :src="photo.src" :alt="'zdjęcie: ' + photo.name" class="w-full object-cover hover:scale-[1.02] transition-all duration-500 cursor-pointer" @click="openModal(photo)" />
+                        <NuxtImg format="avif" placeholder :src="photo.src" :alt="'zdjęcie: ' + photo.name" class="w-full object-cover hover:scale-[1.02] transition-all duration-500 cursor-pointer" @click="openModal(photo)" />
                     </div>
                 </div>
                 <div class="hidden md:flex w-full justify-center gap-3 mt-12">
                     <div v-if="prevCategory" class="text-4xl pb-2 hover:border-b border-black">
                         <NuxtLink :to="'/' + prevCategory.slug" class="flex gap-2 items-center">
                             <Icon name="ci:chevron-left" size="2.5rem" />
-                            <!-- <p>{{ prevCategory.name }}</p> -->
                         </NuxtLink>
                     </div>
                     <div v-else></div>
                     <div v-if="nextCategory" class="text-4xl pb-2 hover:border-b border-black box-border">
                         <NuxtLink :to="'/' + nextCategory.slug" class="flex gap-2 items-center">
-                            <!-- <p>{{ nextCategory.name }}</p> -->
                             <Icon name="ci:chevron-right" size="2.5rem" />
                         </NuxtLink>
                     </div>
@@ -55,9 +53,8 @@
                     </button>
                 </div>
                 <div class="flex flex-col justify-center items-center h-[65vh] md:h-[75vh]">
-                    <img :src="selectedPhoto.src" :alt="'zdjęcie: ' + selectedPhoto.name" class="bg-white p-4 max-w-[85vw] max-h-[65vh] md:max-h-[75vh] object-cover" />
+                    <NuxtImg format="avif" placeholder :src="selectedPhoto.src" :alt="'zdjęcie: ' + selectedPhoto.name" class="bg-white p-4 max-w-[85vw] max-h-[65vh] md:max-h-[75vh] object-cover" />
                 </div>
-                <!-- <img :src="selectedPhoto.src" :alt="'zdjęcie: ' + selectedPhoto.name" class="bg-white p-4 max-w-[80vw] h-[75vh] object-cover" /> -->
                 <div class="flex justify-center gap-6 items-center mt-4 text-white">
                     <button
                         class=""
@@ -94,6 +91,13 @@
     const nextCategory = photosStore.getNextCategory(slug);
     const prevCategory = photosStore.getPreviousCategory(slug);
     category.value = await photosStore.fetchCategory(slug);
+    if (!category.value) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'Nie znaleziono kategorii o takiej nazwie.',
+            fatal: true
+        });
+    };
     await photosStore.fetchPhotos(category.value.id);
     photos.value = photosStore.photos;
     if(category) {
@@ -104,13 +108,6 @@
             url: `/${category.value.slug}`
         });
     }
-    if (!category) {
-        throw createError({
-            statusCode: 404,
-            statusMessage: 'Nie znaleziono kategorii o takiej nazwie.',
-            fatal: true
-        });
-    };
 
     const selectedPhoto = ref(null);
     const openModal = (photo) => {

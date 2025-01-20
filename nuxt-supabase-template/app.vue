@@ -17,10 +17,10 @@
         { property: 'og:image', content: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/mili/portret5.jpg' },
         { property: 'og:type', content: 'website' },
 
-        { name: 'twitter:title', content: '' },
-        { name: 'twitter:description', content: '' },
-        { name: 'twitter:image', content: '' },
-        { name: 'twitter:card', content: '' },
+        // { name: 'twitter:title', content: '' },
+        // { name: 'twitter:description', content: '' },
+        // { name: 'twitter:image', content: '' },
+        // { name: 'twitter:card', content: '' },
 
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }
       ],
