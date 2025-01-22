@@ -17,13 +17,13 @@
                 </div>
                 <div class="hidden md:flex w-full justify-center gap-3 mt-12">
                     <div v-if="prevCategory" class="text-4xl pb-2 hover:border-b border-black">
-                        <NuxtLink :to="'/' + prevCategory.slug" class="flex gap-2 items-center">
+                        <NuxtLink :to="'/' + prevCategory.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + prevCategory.name" class="flex gap-2 items-center">
                             <Icon name="ci:chevron-left" size="2.5rem" />
                         </NuxtLink>
                     </div>
                     <div v-else></div>
                     <div v-if="nextCategory" class="text-4xl pb-2 hover:border-b border-black box-border">
-                        <NuxtLink :to="'/' + nextCategory.slug" class="flex gap-2 items-center">
+                        <NuxtLink :to="'/' + nextCategory.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + nextCategory.name" class="flex gap-2 items-center">
                             <Icon name="ci:chevron-right" size="2.5rem" />
                         </NuxtLink>
                     </div>
@@ -53,7 +53,7 @@
                     </button>
                 </div>
                 <div class="flex flex-col justify-center items-center h-[65vh] md:h-[75vh]">
-                    <NuxtImg format="avif" placeholder :src="selectedPhoto.src" :alt="'zdjęcie: ' + selectedPhoto.name" class="bg-white p-4 max-w-[85vw] max-h-[65vh] md:max-h-[75vh] object-cover" />
+                    <NuxtImg format="avif" placeholder :src="selectedPhoto.src" :alt="'zdjęcie: ' + selectedPhoto.name" class="bg-white p-4 max-w-[85vw] h-auto md:h-[75vh] max-h-[65vh] md:max-h-[75vh] object-cover" />
                 </div>
                 <div class="flex justify-center gap-6 items-center mt-4 text-white">
                     <button
