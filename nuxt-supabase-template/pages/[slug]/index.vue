@@ -4,6 +4,7 @@
             <div class="max-w-7xl mx-auto">
                 <div class="mb-6 lg:mb-9 text-mili_dark_blue text-center">
                     <h1 class="text-4xl md:text-6xl font-semibold">{{ category.name }}</h1>
+                    <h2 class="h-0 w-0 overflow-hidden">Podstrona prezentuje portfolio i listę zdjęć z kategorii {{ category.name }}.</h2>
                     <p class="mt-3 text-base sm:text-lg w-4/5 mx-auto xl:w-2/3">Opis kategorii zdjęć. Jakaś historia,informacje i w ogóle.</p>
                 </div>
                 <div v-if="photos.length > 0" class="columns-1 sm:columns-2 md:columns-3 gap-5">
@@ -15,7 +16,7 @@
                         <NuxtImg format="avif" placeholder :src="photo.src" :alt="'zdjęcie: ' + photo.name" class="w-full object-cover hover:scale-[1.02] transition-all duration-500 cursor-pointer" @click="openModal(photo)" />
                     </div>
                 </div>
-                <div class="hidden md:flex w-full justify-center gap-3 mt-12">
+                <div class="flex w-full justify-center gap-3 mt-12">
                     <div v-if="prevCategory" class="text-4xl pb-2 hover:border-b border-black">
                         <NuxtLink :to="'/' + prevCategory.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + prevCategory.name" class="flex gap-2 items-center">
                             <Icon name="ci:chevron-left" size="2.5rem" />

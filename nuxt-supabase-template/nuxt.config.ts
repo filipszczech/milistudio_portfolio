@@ -29,12 +29,12 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' }
       ],
-      script: [
-        {
-          src: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js",
-          defer: true,
-        },
-      ],
+      // script: [
+      //   {
+      //     src: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js",
+      //     defer: true,
+      //   },
+      // ],
     }
   },
   modules: ['@nuxtjs/supabase', '@nuxtjs/tailwindcss', '@nuxt/image', ['nuxt-mail', {
