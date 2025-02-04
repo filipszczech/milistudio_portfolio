@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            <nav class="w-full text-mili_dark_blue z-50">
+            <nav class="relative w-full text-mili_dark_blue z-50">
                 <div class="w-full flex justify-between items-center py-8 px-4 sm:px-6 lg:px-8" 
                     v-motion
                     :initial="{
@@ -26,17 +26,17 @@
                     </NuxtLink>
                     <!-- Hamburger menu icon for small screens -->
                     <div class="lg:hidden hover-scale-105 cursor-pointer" @click="toggleMenu">
-                        <Icon name="mdi:hamburger-menu" style="color: black" size="1.5rem" />
+                        <Icon name="mdi:hamburger-menu" size="1.5rem" />
                     </div>
                     <!-- Navigation links for larger screens -->
                     <ul class="navbar-links hidden lg:flex gap-6">
                         <NuxtLink to="/">
-                            <li @mouseover="isPortfolioOpen = true" @mouseleave="isPortfolioOpen = false" class="relative py-1 box-border">
+                            <li @mouseover="isPortfolioOpen = true" @mouseleave="isPortfolioOpen = false" class="bg-white relative py-1 box-border z-50">
                                 <div class="flex gap-2 items-center px-2">
                                     <p>portfolio</p>
-                                    <Icon class="transition-all duration-300" :class="{ 'rotate-180': isPortfolioOpen }" name="gridicons:chevron-down" style="color: black" />
+                                    <Icon class="transition-all duration-300" :class="{ 'rotate-180': isPortfolioOpen }" name="gridicons:chevron-down" />
                                 </div>
-                                <ul v-if="isPortfolioOpen" class="absolute top-full bg-white z-50"
+                                <ul v-if="isPortfolioOpen" class="absolute bg-white bg-opacity-65 top-full"
                                     v-motion
                                     :initial="{ opacity: 0, y: -30 }"
                                     :enter="{ opacity: 1, y: 0 }"

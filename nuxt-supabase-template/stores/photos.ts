@@ -16,7 +16,7 @@ export const usePhotosStore = defineStore('photos', {
             this.categoriesPending = true;
             this.categoriesError = null;
             try {
-                const data = await useSupabaseFetch('categories_mili');
+                const data = await useSupabaseFetch('categories_mili', {}, false, 'order', true);
                 this.categories = data || [];
             } catch (error) {
                 this.categoriesError = error.message || 'Error fetching categories.';
@@ -28,12 +28,15 @@ export const usePhotosStore = defineStore('photos', {
             if (this.categories.length === 0) await this.fetchCategories();
             return this.categories.find((category) => category.slug === categorySlug);
         },
-        async fetchPhotos(categoryId: string) {
+        async fetchPhotos(categoryName: string) {
             this.photos = [];
             this.photosPending = true;
             this.photosError = null;
             try {
-                const data = await useSupabaseFetch('photos_mili', { category_id: categoryId });
+                const { data, error } = await useSupabaseGetPhotos('photo-portfolio', categoryName);
+                if (error) {
+                    throw new Error(error);
+                }
                 this.photos = data || [];
             } catch (error) {
                 this.photosError = error.message || 'Error fetching photos.';

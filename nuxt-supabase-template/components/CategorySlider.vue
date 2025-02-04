@@ -1,8 +1,9 @@
 <template>
     <div>
-        <div class="mt-5 md:mt-12 2xl:mt-24 w-full min-h-[32rem]">
-            <div class="grid gap-3 md:gap-6 grid-cols-2 md:grid-cols-2 2xl:grid-cols-4 2xl:mt-32">
-                <div v-for="(category, categoryId) in categories" :key="category.id">
+        <div class="mt-5 w-full min-h-[32rem]">
+            <!-- <div class="grid gap-3 md:gap-6 grid-cols-2 md:grid-cols-2 2xl:grid-cols-4 2xl:mt-6"> -->
+            <div class="flex gap-3 md:gap-6 justify-center flex-wrap">
+                <div v-for="(category, categoryId) in categories" :key="category.id" class="w-[calc(50%-6px)] md:w-[calc(50%-12px)] xl:w-[calc(25%-20px)]">
                     <NuxtLink :to="'/' + category.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + category.name">
                         <CategoryCard
                             v-motion

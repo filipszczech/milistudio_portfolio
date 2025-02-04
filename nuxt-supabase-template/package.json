@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "milistudio-portfolio",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,11 +13,13 @@
     "@nuxt/fonts": "^0.10.3",
     "@nuxt/icon": "^1.5.6",
     "@nuxt/image": "^1.8.1",
+    "@nuxtjs/sitemap": "^7.2.3",
     "@nuxtjs/supabase": "^1.4.1",
     "@pinia/nuxt": "^0.5.5",
     "@vueuse/motion": "^2.2.6",
     "nuxt": "^3.15.1",
     "nuxt-mail": "^5.1.1",
+    "nuxt-schema-org": "^4.1.1",
     "pinia": "^2.2.4",
     "vue": "latest",
     "vue-router": "latest"
