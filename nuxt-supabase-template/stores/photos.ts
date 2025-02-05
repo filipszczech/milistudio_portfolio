@@ -33,14 +33,18 @@ export const usePhotosStore = defineStore('photos', {
             this.photosPending = true;
             this.photosError = null;
             try {
-                const data = await $fetch('/api/photos', {
-                    query: { categoryId },
-                });
-                this.photos = data || [];
+              const { data, error } = await useFetch('/api/photos', {
+                query: { categoryId },
+              });
+              if (error.value) {
+                throw new Error(error.value.message || 'Error fetching photos.');
+              }
+              this.photos = data.value || [];
             } catch (error) {
-                this.photosError = error.message || 'Error fetching photos.';
+              this.photosError = error.message || 'Error fetching photos.';
+              console.error('Błąd pobierania zdjęć:', error);
             } finally {
-                this.photosPending = false;
+              this.photosPending = false;
             }
         },
         getNextCategory(categorySlug: string) {
