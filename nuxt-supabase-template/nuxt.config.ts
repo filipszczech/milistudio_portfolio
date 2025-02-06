@@ -3,7 +3,12 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: process.env.ENABLE_DEVTOOLS === 'true' },
   routeRules: {
-    '/': { prerender: true },
+    '/': { 
+      isr: 60 * 60 * 6,
+      cache: {
+        maxAge: 60 * 60 * 24,
+      },
+    },
     '/**': { 
       isr: 60 * 60 * 6,
       cache: {
