@@ -33,7 +33,10 @@ export const usePhotosStore = defineStore('photos', {
             this.photosPending = true;
             this.photosError = null;
             try {
-                const data = await $fetch(`/api/get_images?category=${category}`);
+                const data = await $fetch(`/api/get_images?category=${encodeURIComponent(category)}`, {
+                    server: false,
+                });
+        
                 this.photos = data.images?.map(item => 
                     `https://pub-6ac639a5d0904d47911839cf9484d860.r2.dev/${encodeURIComponent(item.key)}`
                 ) || [];
