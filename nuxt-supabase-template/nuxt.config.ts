@@ -4,16 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: process.env.ENABLE_DEVTOOLS === 'true' },
   routeRules: {
     '/': { 
-      isr: 60 * 60 * 6,
-      cache: {
-        maxAge: 60 * 60 * 24,
-      },
-    },
-    '/**': { 
-      isr: 60 * 60 * 6,
-      cache: {
-        maxAge: 60 * 60 * 24,
-      },
+      prerender: true,
     },
   },
   app: {
