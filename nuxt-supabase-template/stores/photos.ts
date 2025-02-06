@@ -28,13 +28,15 @@ export const usePhotosStore = defineStore('photos', {
             if (this.categories.length === 0) await this.fetchCategories();
             return this.categories.find((category) => category.slug === categorySlug);
         },
-        async fetchPhotos(categoryId: string) {
+        async fetchPhotos(category: string) {
             this.photos = [];
             this.photosPending = true;
             this.photosError = null;
             try {
-                const data = await useSupabaseFetch('photos_mili', { category_id: categoryId });
-                this.photos = data || [];
+                const data = await $fetch(`/api/get_images?category=${category}`);
+                this.photos = data.images?.map(item => 
+                    `https://pub-6ac639a5d0904d47911839cf9484d860.r2.dev/${encodeURIComponent(item.key)}`
+                ) || [];
             } catch (error) {
                 this.photosError = error.message || 'Error fetching photos.';
             } finally {

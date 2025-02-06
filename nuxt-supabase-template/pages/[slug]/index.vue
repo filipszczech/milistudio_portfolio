@@ -8,12 +8,12 @@
                     <p class="mt-3 text-base sm:text-lg w-4/5 mx-auto xl:w-2/3">Opis kategorii zdjęć. Jakaś historia,informacje i w ogóle.</p>
                 </div>
                 <div v-if="photos.length > 0" class="columns-1 sm:columns-2 md:columns-3 gap-5">
-                    <div v-for="photo in photos" :key="photo.name" class="w-full break-inside-avoid mb-3 sm:mb-5 overflow-hidden"
+                    <div v-for="photo in photos" :key="photo" class="w-full break-inside-avoid mb-3 sm:mb-5 overflow-hidden"
                             v-motion
                             :initial="{ opacity: 0, y: 30 }"
                             :visibleOnce="{ opacity: 1, y: 0 }"
                             :duration="600">
-                        <NuxtImg format="webp" placeholder :src="photo.src" :alt="'zdjęcie: ' + photo.name" class="w-full object-cover hover:scale-[1.02] transition-all duration-500 cursor-pointer" @click="openModal(photo)" />
+                        <NuxtImg format="webp" placeholder :src="photo" :alt="'zdjęcie z kategorii: ' + category.name" class="w-full object-cover hover:scale-[1.02] transition-all duration-500 cursor-pointer" @click="openModal(photo)" />
                     </div>
                 </div>
                 <div class="flex w-full justify-center gap-3 mt-12">
@@ -54,7 +54,7 @@
                     </button>
                 </div>
                 <div class="flex flex-col justify-center items-center h-[65vh] md:h-[75vh]">
-                    <NuxtImg format="webp" placeholder :src="selectedPhoto.src" :alt="'zdjęcie: ' + selectedPhoto.name" class="bg-white p-4 max-w-[85vw] h-auto md:h-[75vh] max-h-[65vh] md:max-h-[75vh] object-cover" />
+                    <NuxtImg format="webp" placeholder :src="selectedPhoto" :alt="'zdjęcie z kategorii: ' + category.name" class="bg-white p-4 max-w-[85vw] h-auto md:h-[75vh] max-h-[65vh] md:max-h-[75vh] object-cover" />
                 </div>
                 <div class="flex justify-center gap-6 items-center mt-4 text-white">
                     <button
@@ -99,7 +99,7 @@
             fatal: true
         });
     };
-    await photosStore.fetchPhotos(category.value.id);
+    await photosStore.fetchPhotos(category.value.slug);
     photos.value = photosStore.photos;
     if(category) {
         useSetSeoData({
