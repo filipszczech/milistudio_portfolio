@@ -1,21 +1,23 @@
 <template>
     <div class="">
-        <PageContent v-if="category">
+        <PageContent>
             <div class="max-w-7xl mx-auto">
                 <div class="mb-6 lg:mb-9 text-mili_dark_blue text-center">
                     <h1 class="text-4xl md:text-6xl font-semibold">{{ category.name }}</h1>
                     <h2 class="h-0 w-0 overflow-hidden">Podstrona prezentuje portfolio i listę zdjęć z kategorii {{ category.name }}.</h2>
                     <p class="mt-3 text-base sm:text-lg w-4/5 mx-auto xl:w-2/3">Opis kategorii zdjęć. Jakaś historia,informacje i w ogóle.</p>
                 </div>
-                <div v-if="photos.length > 0" class="columns-1 sm:columns-2 md:columns-3 gap-5">
-                    <div v-for="photo in photos" :key="photo" class="w-full break-inside-avoid mb-3 sm:mb-5 overflow-hidden"
-                            v-motion
-                            :initial="{ opacity: 0, y: 30 }"
-                            :visibleOnce="{ opacity: 1, y: 0 }"
-                            :duration="600">
-                        <NuxtImg format="webp" placeholder :src="photo" :alt="'zdjęcie z kategorii: ' + category.name" class="w-full object-cover hover:scale-[1.02] transition-all duration-500 cursor-pointer" @click="openModal(photo)" />
+                <ClientOnly>
+                    <div v-if="photos.length > 0" class="columns-1 sm:columns-2 md:columns-3 gap-5">
+                        <div v-for="photo in photos" :key="photo" class="w-full break-inside-avoid mb-3 sm:mb-5 overflow-hidden"
+                                v-motion
+                                :initial="{ opacity: 0, y: 30 }"
+                                :visibleOnce="{ opacity: 1, y: 0 }"
+                                :duration="600">
+                            <NuxtImg format="webp" placeholder :src="photo" :alt="'zdjęcie z kategorii: ' + category.name" class="w-full object-cover hover:scale-[1.02] transition-all duration-500 cursor-pointer" @click="openModal(photo)" />
+                        </div>
                     </div>
-                </div>
+                </ClientOnly>
                 <div class="flex w-full justify-center gap-3 mt-12">
                     <div v-if="prevCategory" class="text-4xl pb-2 hover:border-b border-black">
                         <NuxtLink :to="'/' + prevCategory.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + prevCategory.name" class="flex gap-2 items-center">
@@ -77,7 +79,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup async>
     import { useRoute } from 'vue-router';
     import { ref } from 'vue';
 
