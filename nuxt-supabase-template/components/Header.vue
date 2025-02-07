@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            <nav class="relative w-full text-mili_dark_blue z-50">
+            <nav class="fixed top-0 bg-white lg:relative w-full text-mili_dark_blue z-50">
                 <div class="w-full flex justify-between items-center py-8 px-4 sm:px-6 lg:px-8" 
                     v-motion
                     :initial="{
@@ -59,15 +59,63 @@
                 </div>
                 <!-- Slide-out menu for small screens -->
                 <transition name="slide-down">
-                    <ul v-if="isMenuOpen" class="navbar-links flex flex-col justify-center items-end gap-4 lg:hidden pb-2 px-4 sm:px-6">
-                        <li class="">
-                            <NuxtLink to="/">
-                                <p>portfolio</p>
+                    <ul v-if="isMenuOpen" class="fixed top-0 left-0  bg-white w-screen h-screen max-h-screen navbar-links flex flex-col justify-center pl-12 sm:pl-20 text-2xl gap-3 lg:hidden pb-2 pr-4 sm:pr-6">
+                        
+                    <button @click="toggleMenu" class="absolute top-12 right-12">
+                        <Icon name="ci:close-big" size="2.5rem" />
+                    </button>
+                        <li class="mb-6">
+                            <NuxtLink to="/"  @click="toggleMenu">
+                                <img class="h-12" src="/img/mili.png" alt="mili logo"
+                                    v-motion
+                                    :initial="{
+                                        opacity: 0,
+                                        scale: 0.7,
+                                        x: -100,
+                                    }"
+                                    :enter="{
+                                        opacity: 1,
+                                        scale: 1,
+                                        x: 0,
+                                    }"
+                                    :duration="500"
+                                />
                             </NuxtLink>
                         </li>
-                        <li class="">
-                            <NuxtLink to="/about">
+                        <li class=""
+                            v-motion
+                                :initial="{
+                                    opacity: 0,
+                                    scale: 0.7,
+                                    x: -100,
+                                }"
+                                :enter="{
+                                    opacity: 1,
+                                    scale: 1,
+                                    x: 0,
+                                }"
+                                :duration="500"
+                                :delay="100">
+                            <NuxtLink to="/about"  @click="toggleMenu">
                                 <p>o nas</p>
+                            </NuxtLink>
+                        </li>
+                        <li v-for="(category, index) in categories" :key="category.id" class=""
+                            v-motion
+                                :initial="{
+                                    opacity: 0,
+                                    scale: 0.7,
+                                    x: -100,
+                                }"
+                                :enter="{
+                                    opacity: 1,
+                                    scale: 1,
+                                    x: 0,
+                                }"
+                                :duration="500"
+                                :delay="200 + 100*index">
+                            <NuxtLink :to="'/' + category.slug"  @click="toggleMenu">
+                                <p>{{ category.name }}</p>
                             </NuxtLink>
                         </li>
                     </ul>
@@ -81,7 +129,15 @@
     const isMenuOpen = ref(false);
     const toggleMenu = () => {
         isMenuOpen.value = !isMenuOpen.value;
+        toggleBodyScroll(isMenuOpen.value);
     }
+    const toggleBodyScroll = (disable) => {
+        if (disable) {
+            document.body.classList.add('overflow-hidden');
+        } else {
+            document.body.classList.remove('overflow-hidden');
+        }
+    };
     const isPortfolioOpen = ref(false);
     const photosStore = usePhotosStore();
     const categories = ref([]);
@@ -101,7 +157,7 @@
 
     .slide-down-enter-to, .slide-down-leave-from {
         opacity: 1;
-        max-height: 300px;
+        max-height: 100vh;
     }
 
     .navbar-links .router-link-exact-active {

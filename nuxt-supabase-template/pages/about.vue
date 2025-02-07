@@ -3,7 +3,7 @@
         <PageContent>
             <div class="max-w-7xl mx-auto mb-9">
                 <div class="flex flex-col gap-6 justify-center items-center">
-                    <NuxtImg format="webp" placeholder :src="profile.img" alt="Michał Lichtański - zdjęcie profilowe" class="w-full object-cover max-w-[32rem] mx-auto mb-6" />
+                    <NuxtImg format="webp" placeholder :src="profile.img" alt="Michał Lichtański - zdjęcie profilowe" class="w-full mt-6 lg:mt-0 object-cover max-w-[32rem] mx-auto mb-6" />
                     <h1 class="text-4xl md:text-6xl font-semibold text-center"
                         v-motion
                         :initial="{ opacity: 0, y: 20 }"
