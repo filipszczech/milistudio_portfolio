@@ -9,7 +9,7 @@
                             v-motion
                             :initial="{ opacity: 0, y: 20 }"
                             :visibleOnce="{ opacity: 1, y: 0 }"
-                            :duration="600" :delay="200 + 200*categoryId" :category="category" />
+                            :duration="600" :delay="100 + 75*categoryId" :category="category" />
                     </NuxtLink>
                 </div>
             </div>

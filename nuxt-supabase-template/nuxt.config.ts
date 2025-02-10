@@ -2,11 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: process.env.ENABLE_DEVTOOLS === 'true' },
-  // routeRules: {
-  //   '/': { 
-  //     prerender: true,
-  //   },
-  // },
+  routeRules: {
+    '/': { 
+      prerender: true,
+    },
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {

@@ -2,7 +2,7 @@
     <div class="">
         <PageContent>
             <div class="max-w-7xl mx-auto mb-9">
-                <div class="flex flex-col gap-6 justify-center items-center">
+                <div v-if="profile" class="flex flex-col gap-6 justify-center items-center">
                     <NuxtImg format="webp" placeholder :src="profile.img" alt="Michał Lichtański - zdjęcie profilowe" class="w-full mt-6 lg:mt-0 object-cover max-w-[32rem] mx-auto mb-6" />
                     <h1 class="text-4xl md:text-6xl font-semibold text-center"
                         v-motion
@@ -49,17 +49,16 @@
                         <span>mili.studio</span>
                     </a>
                 </div>
+                <div v-else>loading...</div>
             </div>
         </PageContent>
     </div>
 </template>
 
 <script setup>
-    // const { data: profile, error: profileError } = await useFetch('/api/profile');
-    const profile = {
-        img: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/mili/portret5.jpg',
-        desc: 'Fotograf Michał Lichtański. Twórca i właściciel studia fotograficznego milistudio. Zapraszam do współpracy.'
-    };
+    const profile = ref(null);
+    const data = await $fetch('/api/profile');
+    profile.value = data;
     
     useHead({
         title: "Milistudio | o nas",

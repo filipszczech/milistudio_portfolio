@@ -1,24 +1,24 @@
 <template>
     <div class="">
         <PageContent>
-            <div class="max-w-7xl mx-auto">
+            <div class="max-w-7xl mx-auto min-h-screen">
                 <div class="mb-6 lg:mb-9 text-mili_dark_blue text-center">
                     <h1 class="text-4xl md:text-6xl font-semibold">{{ category.name }}</h1>
-                    <h2 class="h-0 w-0 overflow-hidden">Podstrona prezentuje portfolio i listę zdjęć z kategorii {{ category.name }}.</h2>
-                    <p class="mt-3 text-base sm:text-lg w-4/5 mx-auto xl:w-2/3">Opis kategorii zdjęć. Jakaś historia,informacje i w ogóle.</p>
+                    <h2 class="h-0 w-0 overflow-hidden">Podstrona prezentuje portfolio i listę zdjęć z kategorii {{ category.name }} zrealizowanych przez studio fotograficzne mili w Krakowie.</h2>
+                    <p class="mt-3 text-base sm:text-lg w-4/5 mx-auto xl:w-2/3">{{ category.desc }}</p>
                 </div>
-                    <div v-if="photos.length > 0" class="columns-1 sm:columns-2 md:columns-3 gap-5">
-                        <div v-for="photo in photos" :key="photo" class="w-full break-inside-avoid mb-3 sm:mb-5 overflow-hidden"
-                                v-motion
-                                :initial="{ opacity: 0, y: 30 }"
-                                :visibleOnce="{ opacity: 1, y: 0 }"
-                                :duration="600">
-                            <NuxtImg format="webp" placeholder :src="photo" :alt="'zdjęcie z kategorii: ' + category.name" class="w-full object-cover hover:scale-[1.02] transition-all duration-500 cursor-pointer" @click="openModal(photo)" />
-                        </div>
+                <div v-show="showPhotos" class="columns-1 sm:columns-2 md:columns-3 gap-5">
+                    <div v-for="photo in photos" :key="photo" class="w-full break-inside-avoid mb-3 sm:mb-5 overflow-hidden"
+                            v-motion
+                            :initial="{ opacity: 0, y: 30 }"
+                            :visibleOnce="{ opacity: 1, y: 0 }"
+                            :duration="600">
+                        <NuxtImg format="webp" placeholder  :src="photo" :alt="'zdjęcie z kategorii: ' + category.name" class="w-full object-cover hover:scale-[1.02] transition-all duration-500 cursor-pointer" @click="openModal(photo)" />
                     </div>
-                    <div v-else class="text-center mt-12">
-                        loading...
-                    </div>
+                </div>
+                <div v-if="!showPhotos" class="text-center mt-12">
+                    loading...
+                </div>
                 <div class="flex w-full justify-center gap-3 mt-12">
                     <div v-if="prevCategory" class="text-4xl pb-2 hover:border-b border-black">
                         <NuxtLink :to="'/' + prevCategory.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + prevCategory.name" class="flex gap-2 items-center">
@@ -90,6 +90,7 @@
 
     const category = ref(null);
     const photos = ref([]);
+    const showPhotos = ref(false);
 
     await photosStore.fetchCategories();
     const nextCategory = photosStore.getNextCategory(slug);
@@ -104,6 +105,9 @@
     };
     await photosStore.fetchPhotos(category.value.slug);
     photos.value = photosStore.photos;
+    setTimeout(() => {
+        showPhotos.value = true;
+    }, 500);
     if(category) {
         useSetSeoData({
             title: category.value.name,

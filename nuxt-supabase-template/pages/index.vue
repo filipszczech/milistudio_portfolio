@@ -20,7 +20,9 @@
         await photosStore.fetchCategories();
         categories.value = photosStore.categories;
     } finally {
-        isLoading.value = false;
+        setTimeout(() => {
+            isLoading.value = false;
+        }, 500);
     }
 
     useHead({
