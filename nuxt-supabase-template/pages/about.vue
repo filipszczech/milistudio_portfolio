@@ -2,23 +2,15 @@
     <div class="">
         <PageContent>
             <div class="max-w-7xl mx-auto mb-9">
-                <div v-if="profile" class="flex flex-col gap-6 justify-center items-center">
-                    <NuxtImg format="webp" placeholder :src="profile.img" alt="Michał Lichtański - zdjęcie profilowe" class="w-full mt-6 lg:mt-0 object-cover max-w-[32rem] mx-auto mb-6" />
-                    <h1 class="text-4xl md:text-6xl font-semibold text-center"
-                        v-motion
-                        :initial="{ opacity: 0, y: 20 }"
-                        :visibleOnce="{ opacity: 1, y: 0 }"
-                        :duration="600" 
-                        :delay="200"
-                    >milistudio.</h1>
-                    <!-- <p class="text-center text-lg lg:text-xl"
-                        v-motion
-                        :initial="{ opacity: 0, y: 20 }"
-                        :visibleOnce="{ opacity: 1, y: 0 }"
-                        :duration="600" 
-                        :delay="400"
-                    >murzyn kurier rowerowy we własnej osobie</p> -->
-                    <p class="text-center text-lg lg:text-xl max-w-2xl my-6">{{ profile.desc }}</p>
+                <div class="flex flex-col gap-6 justify-center items-center">
+                    <Suspense>
+                        <template #default>
+                            <AsyncAboutProfile />
+                        </template>
+                        <template #fallback>
+                            <p>Loading...</p>
+                        </template>
+                    </Suspense>
                     <h2 class="text-4xl md:text-6xl font-semibold text-center mb-6">linki</h2>
                     <a href="https://www.instagram.com/lichtanskimichal/" target="_blank" rel="noopener" aria-label="Michał Lichtański Instagram Profile" class="flex gap-2 items-center text-lg lg:text-xl pb-1 border-b border-black w-fit"
                         v-motion
@@ -49,16 +41,13 @@
                         <span>mili.studio</span>
                     </a>
                 </div>
-                <div v-else>loading...</div>
             </div>
         </PageContent>
     </div>
 </template>
 
 <script setup>
-    const profile = ref(null);
-    const data = await $fetch('/api/profile');
-    profile.value = data;
+    const AsyncAboutProfile = defineAsyncComponent(() => import('~/components/AboutProfile.vue'));
     
     useHead({
         title: "Milistudio | o nas",

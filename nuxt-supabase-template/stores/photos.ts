@@ -28,16 +28,13 @@ export const usePhotosStore = defineStore('photos', {
             if (this.categories.length === 0) await this.fetchCategories();
             return this.categories.find((category) => category.slug === categorySlug);
         },
-        async fetchPhotos(category: string) {
+        async fetchPhotos(categoryId: string) {
             this.photos = [];
             this.photosPending = true;
             this.photosError = null;
             try {
-                const data = await $fetch(`/api/get_images?category=${encodeURIComponent(category)}`);
-        
-                this.photos = data.images?.map(item => 
-                    `https://pub-6ac639a5d0904d47911839cf9484d860.r2.dev/${encodeURIComponent(item.key)}`
-                ) || [];
+                const data = await $fetch(`/api/photos?categoryId=${categoryId}`);
+                this.photos = data || [];
             } catch (error) {
                 this.photosError = error.message || 'Error fetching photos.';
             } finally {

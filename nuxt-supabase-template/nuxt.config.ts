@@ -63,5 +63,6 @@ export default defineNuxtConfig({
   },
   sitemap: {
     gzip: true,
+    sources: ["/api/__sitemap__/urls"],
   },
 })

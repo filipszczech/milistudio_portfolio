@@ -18,10 +18,8 @@
 </template>
 
 <script setup>
-    defineProps({
-    categories: {
-        type: Object,
-        required: true
-    }
-    });
+    const photosStore = usePhotosStore();
+    const categories = ref([]);
+    await photosStore.fetchCategories();
+    categories.value = photosStore.categories;
 </script>
