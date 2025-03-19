@@ -1,5 +1,5 @@
 <template>
-    <div class="relative h-64 sm:h-80 md:h-[32rem] w-full cursor-pointer"
+    <div class="relative h-64 sm:h-80 md:h-[32rem] xl:h-96 2xl:h-[32rem] w-full cursor-pointer"
         @mouseenter="hover = true"
         @mouseleave="hover = false">
         <NuxtImg format="webp" placeholder class="w-full h-full object-cover hover:opacity-60 transition-all duration-500 bg-white" :src="category.img" :alt="'Zdjęcie okładkowe kategorii ' + category.name"/>
@@ -28,7 +28,7 @@
   
 <style scoped>
     .text-test {
-        background: rgba(255, 255, 255, 0.1); /* Półprzezroczyste tło */
+        background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(3px);
     }
 </style>

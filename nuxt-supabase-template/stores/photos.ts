@@ -11,15 +11,35 @@ export const usePhotosStore = defineStore('photos', {
     }),
     
     actions: {
+        // async fetchCategories() {
+        //     if (this.categories.length > 0) return;
+        //     this.categoriesPending = true;
+        //     this.categoriesError = null;
+        //     try {
+        //         const data = await $fetch('/api/categories');
+        //         this.categories = data || [];
+        //     } catch (error) {
+        //         this.categoriesError = error.message || 'Error fetching categories.';
+        //     } finally {
+        //         this.categoriesPending = false;
+        //     }
+        // },
         async fetchCategories() {
-            if (this.categories.length > 0) return;
+            if (!process.client) return;
+            const supabase = useSupabaseClient();
             this.categoriesPending = true;
             this.categoriesError = null;
+
             try {
-                const data = await $fetch('/api/categories');
+                const { data, error } = await supabase
+                .from('categories_mili')
+                .select('*')
+                .order('order', { ascending: true, nullsFirst: false });
+
+                if (error) throw new Error(error.message);
                 this.categories = data || [];
             } catch (error) {
-                this.categoriesError = error.message || 'Error fetching categories.';
+                this.categoriesError = (error as Error).message;
             } finally {
                 this.categoriesPending = false;
             }
@@ -29,14 +49,22 @@ export const usePhotosStore = defineStore('photos', {
             return this.categories.find((category) => category.slug === categorySlug);
         },
         async fetchPhotos(categoryId: string) {
+            if (!process.client) return;
+            const supabase = useSupabaseClient();
             this.photos = [];
             this.photosPending = true;
             this.photosError = null;
             try {
-                const data = await $fetch(`/api/photos?categoryId=${categoryId}`);
+                const { data, error } = await supabase
+                  .from('photos_mili')
+                  .select('*')
+                  .eq('category_id', categoryId)
+                  .order('order', { ascending: true, nullsFirst: false });
+        
+            if (error) throw new Error(error.message);
                 this.photos = data || [];
             } catch (error) {
-                this.photosError = error.message || 'Error fetching photos.';
+                this.photosError = (error as Error).message;
             } finally {
                 this.photosPending = false;
             }

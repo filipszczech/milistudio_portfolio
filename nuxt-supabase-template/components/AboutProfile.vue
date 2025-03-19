@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="profile">
         <NuxtImg format="webp" placeholder :src="profile.img" alt="Michał Lichtański - zdjęcie profilowe" class="w-full mt-6 lg:mt-0 object-cover max-w-[32rem] mx-auto mb-6" />
         <h1 class="text-4xl md:text-6xl font-semibold text-center"
             v-motion
@@ -14,6 +14,26 @@
 
 <script setup>
     const profile = ref(null);
-    const data = await $fetch('/api/profile');
-    profile.value = data;
+    const profilePending = ref(true);
+    const profileError = ref(null);
+
+    onMounted(async () => {
+        const supabase = useSupabaseClient();
+        profileError.value = null;
+        try {
+            const { data, error } = await supabase
+            .from('profiles_mili')
+            .select('*')
+            .eq('active', true)
+            .limit(1)
+            .single();
+    
+        if (error) throw new Error(error.message);
+        profile.value = data || null;
+        } catch (error) {
+            profileError.value = error.message;
+        } finally {
+            profilePending.value = false;
+        }
+    });
 </script>

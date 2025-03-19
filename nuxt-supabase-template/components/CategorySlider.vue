@@ -20,6 +20,8 @@
 <script setup>
     const photosStore = usePhotosStore();
     const categories = ref([]);
-    await photosStore.fetchCategories();
-    categories.value = photosStore.categories;
+    onMounted(async () => {
+        await photosStore.fetchCategories();
+        categories.value = photosStore.categories;
+    });
 </script>

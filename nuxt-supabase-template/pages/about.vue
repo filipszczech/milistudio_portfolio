@@ -8,7 +8,7 @@
                             <AsyncAboutProfile />
                         </template>
                         <template #fallback>
-                            <p>Loading...</p>
+                            <LoadingScreen />
                         </template>
                     </Suspense>
                     <h2 class="text-4xl md:text-6xl font-semibold text-center mb-6">linki</h2>
