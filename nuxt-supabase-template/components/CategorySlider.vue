@@ -9,7 +9,10 @@
                             v-motion
                             :initial="{ opacity: 0, y: 20 }"
                             :visibleOnce="{ opacity: 1, y: 0 }"
-                            :duration="600" :delay="100 + 75*categoryId" :category="category" />
+                            :duration="600" 
+                            :delay="isLargeScreen ? 100 + 75 * categoryId : 0"
+                            :category="category"
+                            @click="photosStore.setCurrentCategory(category.name)" />
                     </NuxtLink>
                 </div>
             </div>
@@ -20,6 +23,7 @@
 <script setup>
     const photosStore = usePhotosStore();
     const categories = ref([]);
+    const isLargeScreen = computed(() => window.innerWidth >= 1024);
     onMounted(async () => {
         await photosStore.fetchCategories();
         categories.value = photosStore.categories;

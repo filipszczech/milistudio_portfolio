@@ -1,13 +1,24 @@
 import { defineStore } from 'pinia';
 
+interface Category {
+    id: number;
+    name: string;
+    desc: string | null;
+    slug: string;
+    active: boolean;
+    order: number;
+
+}
+
 export const usePhotosStore = defineStore('photos', {
     state: () => ({
-        categories: [] as Array<any>,
+        categories: [] as Array<Category>,
         categoriesPending: false,
         categoriesError: null as string | null,
         photos: [] as Array<any>,
         photosPending: false,
         photosError: null as string | null,
+        currentCategory: '' as string | null,
     }),
     
     actions: {
@@ -80,6 +91,9 @@ export const usePhotosStore = defineStore('photos', {
             const currentIndex = this.categories.findIndex((category) => category.slug === categorySlug);
             if (currentIndex === -1) return null;
             return this.categories[currentIndex - 1] || this.categories[this.categories.length - 1];
-        }
+        },
+        setCurrentCategory(category: string) {
+            this.currentCategory = category;
+        },
     },
 });

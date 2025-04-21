@@ -13,7 +13,7 @@
                         y: 0,
                     }"
                     :duration="500">
-                    <NuxtLink to="/">
+                    <NuxtLink to="/" aria-label="Zobacz stronę główną Milistudio">
                         <img class="h-7" src="/img/mili.png" alt="mili logo"
                             v-motion
                             :initial="{
@@ -30,7 +30,7 @@
                     </div>
                     <!-- Navigation links for larger screens -->
                     <ul class="navbar-links hidden lg:flex gap-6">
-                        <NuxtLink to="/">
+                        <NuxtLink to="/" aria-label="Zobacz stronę główną Milistudio">
                             <li @mouseover="isPortfolioOpen = true" @mouseleave="isPortfolioOpen = false" class="bg-white relative py-1 box-border z-50">
                                 <div class="flex gap-2 items-center px-2">
                                     <p>portfolio</p>
@@ -42,15 +42,15 @@
                                     :enter="{ opacity: 1, y: 0 }"
                                     :leave="{ opacity: 0, y: -30 }"
                                     :duration="400">
-                                    <li v-for="(category) in categories" :key="category.id" class="py-1 px-2">
-                                        <NuxtLink :to="'/' + category.slug">
-                                            <p>{{ category.name }}</p>
+                                    <li v-for="(category) in categories" :key="category.id">
+                                        <NuxtLink :to="'/' + category.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + category.name">
+                                            <p class="py-1 px-2" @click="photosStore.setCurrentCategory(category.name)">{{ category.name }}</p>
                                         </NuxtLink>
                                     </li>
                                 </ul>
                             </li>
                         </NuxtLink>
-                        <NuxtLink to="/about">
+                        <NuxtLink to="/about" aria-label="Zobacz informacje na temat Milistudio">
                             <li class="py-1 px-2">
                                 <p>o mnie</p>
                             </li>
@@ -65,7 +65,7 @@
                         <Icon name="ci:close-big" size="2.5rem" />
                     </button>
                         <li class="mb-6">
-                            <NuxtLink to="/"  @click="toggleMenu">
+                            <NuxtLink to="/" aria-label="Zobacz stronę główną Milistudio"  @click="toggleMenu">
                                 <img class="h-12" src="/img/mili.png" alt="mili logo"
                                     v-motion
                                     :initial="{
@@ -96,7 +96,7 @@
                                 }"
                                 :duration="500"
                                 :delay="100">
-                            <NuxtLink to="/about"  @click="toggleMenu">
+                            <NuxtLink to="/about" aria-label="Zobacz informacje na temat Milistudio" @click="toggleMenu">
                                 <p>o nas</p>
                             </NuxtLink>
                         </li>
@@ -114,7 +114,7 @@
                                 }"
                                 :duration="500"
                                 :delay="200 + 100*index">
-                            <NuxtLink :to="'/' + category.slug"  @click="toggleMenu">
+                            <NuxtLink :to="'/' + category.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + category.name"  @click="handleCategoryClick(category)">
                                 <p>{{ category.name }}</p>
                             </NuxtLink>
                         </li>
@@ -127,16 +127,23 @@
 
 <script setup>
     const isMenuOpen = ref(false);
+
     const toggleMenu = () => {
         isMenuOpen.value = !isMenuOpen.value;
         toggleBodyScroll(isMenuOpen.value);
     }
+
     const toggleBodyScroll = (disable) => {
         if (disable) {
             document.body.classList.add('overflow-hidden');
         } else {
             document.body.classList.remove('overflow-hidden');
         }
+    };
+
+    const handleCategoryClick = (category) => {
+        toggleMenu();
+        photosStore.setCurrentCategory(category.name)
     };
     const isPortfolioOpen = ref(false);
     const photosStore = usePhotosStore();

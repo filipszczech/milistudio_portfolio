@@ -9,7 +9,7 @@
                         <AsyncCategorySlider />
                     </template>
                     <template #fallback>
-                        <LoadingScreen />
+                        <Loader />
                     </template>
                 </Suspense>
             </div>

@@ -8,7 +8,7 @@
                             <AsyncAboutProfile />
                         </template>
                         <template #fallback>
-                            <LoadingScreen />
+                            <Loader />
                         </template>
                     </Suspense>
                     <h2 class="text-4xl md:text-6xl font-semibold text-center mb-6">linki</h2>
@@ -50,7 +50,7 @@
     const AsyncAboutProfile = defineAsyncComponent(() => import('~/components/AboutProfile.vue'));
     
     useHead({
-        title: "Milistudio | o nas",
+        title: "Milistudio - o nas",
         meta: [
             { name: 'description', content: 'Milistudio - informacje o nas.' },
             { property: 'og:description', content: 'Milistudio - informacje o nas.' },

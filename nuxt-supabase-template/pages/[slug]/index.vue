@@ -13,7 +13,7 @@
                             <AsyncPhotosContainer :category="category" />
                         </template>
                         <template #fallback>
-                            <LoadingScreen />
+                            <Loader />
                         </template>
                     </Suspense>
                 </div>
@@ -49,7 +49,7 @@
     const prevCategory = ref(null);
 
     useHead({
-        title: "Milistudio | ",
+        title: "Milistudio - " + photosStore.currentCategory,
     });
 
     onMounted(async () => {
@@ -71,6 +71,7 @@
                 image: category.value.img,
                 url: `/${category.value.slug}`
             });
+            photosStore.setCurrentCategory(category.value.name);
         }
     });    
 

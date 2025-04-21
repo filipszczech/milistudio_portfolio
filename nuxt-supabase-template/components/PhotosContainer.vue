@@ -1,6 +1,11 @@
 <template>
     <div>
-        <div class="columns-1 sm:columns-2 md:columns-3 gap-5">
+        <div class="columns-1 sm:columns-2 md:columns-3 gap-5 relative">
+            <div v-show="loaderActive" class="absolute top-0 left-0 w-full min-h-screen h-full z-10 bg-white transition-all duration-500">
+                <div class="flex justify-center items-center w-full">
+                    <Loader />
+                </div>
+            </div>
             <div v-for="photo in photos" :key="photo" class="w-full break-inside-avoid mb-3 sm:mb-5 overflow-hidden"
                     v-motion
                     :initial="{ opacity: 0, y: 30 }"
@@ -29,6 +34,7 @@
     
     const photosStore = usePhotosStore();
     const photos = ref([]);
+    const loaderActive = ref(false);
     await photosStore.fetchPhotos(props.category.id);
     photos.value = photosStore.photos;
 
@@ -75,7 +81,15 @@
         }
     };
 
+    const showLoader = () => {
+        loaderActive.value = true;
+        setTimeout(() => {
+            loaderActive.value = false;
+        }, 1000);
+    };
+
     onMounted(() => {
+        showLoader();
         window.addEventListener('keydown', handleKeydown);
     });
 

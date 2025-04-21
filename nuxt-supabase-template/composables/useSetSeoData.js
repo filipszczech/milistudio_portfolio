@@ -3,7 +3,7 @@ export function useSetSeoData({ title, description, image = '', type='' }) {
     const formattedTitle = title.toLowerCase();
   
     useHead({
-      title: `Milistudio | ${formattedTitle}`,
+      title: `Milistudio - ${formattedTitle}`,
     });
   
     useSeoMeta({
