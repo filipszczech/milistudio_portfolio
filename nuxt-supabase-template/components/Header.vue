@@ -44,7 +44,7 @@
                                     :duration="400">
                                     <li v-for="(category) in categories" :key="category.id">
                                         <NuxtLink :to="'/' + category.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + category.name">
-                                            <p class="py-1 px-2" @click="photosStore.setCurrentCategory(category.name)">{{ category.name }}</p>
+                                            <p class="py-1 px-2" @click="categoriesStore.setCurrentCategory(category.slug)">{{ category.name }}</p>
                                         </NuxtLink>
                                     </li>
                                 </ul>
@@ -127,6 +127,11 @@
 
 <script setup>
     const isMenuOpen = ref(false);
+    const isPortfolioOpen = ref(false);
+    const categoriesStore = useCategoriesStore();
+    const categories = ref([]);
+    await categoriesStore.fetchCategories();
+    categories.value = categoriesStore.categories;
 
     const toggleMenu = () => {
         isMenuOpen.value = !isMenuOpen.value;
@@ -143,13 +148,8 @@
 
     const handleCategoryClick = (category) => {
         toggleMenu();
-        photosStore.setCurrentCategory(category.name)
+        categoriesStore.setCurrentCategory(category.slug)
     };
-    const isPortfolioOpen = ref(false);
-    const photosStore = usePhotosStore();
-    const categories = ref([]);
-    await photosStore.fetchCategories();
-    categories.value = photosStore.categories;
 </script>
 
 <style scoped>

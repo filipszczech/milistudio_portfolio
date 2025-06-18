@@ -20,7 +20,7 @@
                 </button>
             </div>
             <div class="flex flex-col justify-center items-center bg-white p-4">
-                <NuxtImg format="webp" placeholder :src="photo.src" :alt="'zdjęcie z kategorii: ' + category" class=" max-w-[85vw] h-auto max-h-[65vh] md:max-h-[75vh] object-cover" />
+                <NuxtImg format="webp" placeholder :src="'https://strapi.lichtanski.com' + photo.url" :alt="'zdjęcie z kategorii: ' + category" class=" max-w-[85vw] h-auto max-h-[65vh] md:max-h-[75vh] object-cover" />
                 <p v-if="photo.name" class="mt-4 lg:text-lg">{{ photo.name }}</p>
             </div>
             <div class="flex justify-center gap-6 items-center mt-4 text-white">

@@ -48,6 +48,8 @@
 
 <script setup>
     const AsyncAboutProfile = defineAsyncComponent(() => import('~/components/AboutProfile.vue'));
+    const { data: categories } = await useFetch('https://strapi.lichtanski.com/api/categories?populate=photos')
+    console.log(categories.value);
     
     useHead({
         title: "Milistudio - o nas",

@@ -11,7 +11,7 @@
                     :initial="{ opacity: 0, y: 30 }"
                     :visibleOnce="{ opacity: 1, y: 0 }"
                     :duration="600">
-                <NuxtImg @click="openModal(photo)" format="webp" placeholder :src="photo.src" :alt="'zdjęcie z kategorii: ' + category.name" class="w-full object-cover md:hover:scale-[1.02] transition-all duration-500 md:cursor-pointer" />
+                <NuxtImg @click="openModal(photo)" format="webp" placeholder :src="'https://strapi.lichtanski.com' + photo.url" :alt="'zdjęcie z kategorii: ' + category.name" class="w-full object-cover md:hover:scale-[1.02] transition-all duration-500 md:cursor-pointer" />
             </div>
         </div>
         <PhotoModal 
@@ -31,15 +31,9 @@
             required: true
         }
     });
-    
-    const photosStore = usePhotosStore();
-    const photos = ref([]);
-    const loaderActive = ref(false);
-    await photosStore.fetchPhotos(props.category.id);
-    photos.value = photosStore.photos;
-
-    // modal
+    const photos = ref(props.category.photos);
     const selectedPhoto = ref(null);
+    const loaderActive = ref(false);
     const isLargeScreen = computed(() => window.innerWidth >= 768);
     const openModal = (photo) => {
         selectedPhoto.value = photo;

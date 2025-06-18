@@ -12,7 +12,7 @@
                             :duration="600" 
                             :delay="isLargeScreen ? 100 + 75 * categoryId : 0"
                             :category="category"
-                            @click="photosStore.setCurrentCategory(category.name)" />
+                            @click="categoriesStore.setCurrentCategory(category.slug)" />
                     </NuxtLink>
                 </div>
             </div>
@@ -21,11 +21,11 @@
 </template>
 
 <script setup>
-    const photosStore = usePhotosStore();
-    const categories = ref([]);
+    const categoriesStore = useCategoriesStore();
+    const categories = ref(null);
     const isLargeScreen = computed(() => window.innerWidth >= 1024);
     onMounted(async () => {
-        await photosStore.fetchCategories();
-        categories.value = photosStore.categories;
+        await categoriesStore.fetchCategories();
+        categories.value = categoriesStore.categories;
     });
 </script>
