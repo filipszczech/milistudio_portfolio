@@ -11,16 +11,16 @@
       meta: [
         { name: "title", content: 'Milistudio - portfolio fotograficzne' },
         { name: "description", content: 'Strona prezentuje portfolio studia fotograficznego Milistudio.' },
-        { property: 'og:url', content: '' },
+        { property: 'og:url', content: 'https://lichtanski.com/' },
         { property: 'og:title', content: 'Milistudio - portfolio fotograficzne' },
         { property: 'og:description', content: 'Strona prezentuje portfolio studia fotograficznego Milistudio.' },
-        { property: 'og:image', content: 'https://invicpjbigavhuttylvh.supabase.co/storage/v1/object/public/photo-portfolio/mili/portret5.jpg' },
+        { property: 'og:image', content: 'https://strapi.lichtanski.com/uploads/portret1_32f23cb10a.webp' },
         { property: 'og:type', content: 'website' },
 
-        // { name: 'twitter:title', content: '' },
-        // { name: 'twitter:description', content: '' },
-        // { name: 'twitter:image', content: '' },
-        // { name: 'twitter:card', content: '' },
+        { name: 'twitter:title', content: 'Milistudio - portfolio fotograficzne' },
+        { name: 'twitter:description', content: 'Strona prezentuje portfolio studia fotograficznego Milistudio.' },
+        { name: 'twitter:image', content: 'https://strapi.lichtanski.com/uploads/portret1_32f23cb10a.webp' },
+        { name: 'twitter:card', content: '' },
 
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }
       ],

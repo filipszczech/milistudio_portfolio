@@ -57,8 +57,6 @@
 
     onMounted(async () => {
         await categoriesStore.fetchCategories()
-        console.log(route.params.slug)
-        console.log(categoriesStore.categories)
         const currentCategory = categoriesStore.setCurrentCategory(route.params.slug);
         if(!currentCategory) {
             throw createError({
@@ -73,7 +71,7 @@
         useSetSeoData({
             title: h.category.name,
             description: `Portfolio studia fotograficznego Mili Studio (Kraków). Zdjęcia z kategorii ${h.category.name}.`,
-            image: h.category.img.url,
+            image: `https://strapi.lichtanski.com${h.category.img.url}`,
             url: `/${h.category.slug}`,
         })
     })

@@ -10,19 +10,19 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
-      title: 'title',
+      title: 'Milistudio - portfolio fotograficzne',
       meta: [
-        { name: "description", content: 'desc' },
-        { property: 'og:url', content: 'url' },
-        { property: 'og:title', content: 'title' },
-        { property: 'og:description', content: 'og desc' },
-        { property: 'og:image', content: '' },
+        { name: "description", content: 'Strona prezentuje portfolio studia fotograficznego Milistudio.' },
+        { property: 'og:url', content: 'https://lichtanski.com/' },
+        { property: 'og:title', content: 'Milistudio - portfolio fotograficzne' },
+        { property: 'og:description', content: 'Strona prezentuje portfolio studia fotograficznego Milistudio.' },
+        { property: 'og:image', content: 'https://strapi.lichtanski.com/uploads/portret1_32f23cb10a.webp' },
         { property: 'og:type', content: 'website' },
 
-        // { name: 'twitter:title', content: 'title' },
-        // { name: 'twitter:description', content: 'twitter desc' },
-        // { name: 'twitter:image', content: '' },
-        // { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:title', content: 'Milistudio - portfolio fotograficzne' },
+        { name: 'twitter:description', content: 'Strona prezentuje portfolio studia fotograficznego Milistudio.' },
+        { name: 'twitter:image', content: 'https://strapi.lichtanski.com/uploads/portret1_32f23cb10a.webp' },
+        { name: 'twitter:card', content: '' },
 
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }
       ],
@@ -37,15 +37,7 @@ export default defineNuxtConfig({
       // ],
     }
   },
-  modules: ['@nuxtjs/supabase', '@nuxtjs/tailwindcss', '@nuxt/image', ['nuxt-mail', {
-    smtp: {
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    },
-  }], '@pinia/nuxt', '@nuxt/icon', '@nuxt/fonts', '@vueuse/motion/nuxt', 'nuxt-schema-org', '@nuxtjs/sitemap'],
+  modules: ['@nuxtjs/supabase', '@nuxtjs/tailwindcss', '@nuxt/image', '@pinia/nuxt', '@nuxt/icon', '@nuxt/fonts', '@vueuse/motion/nuxt', 'nuxt-schema-org', '@nuxtjs/sitemap'],
   mail: {
     message: {
       to: process.env.EMAIL_USER,
