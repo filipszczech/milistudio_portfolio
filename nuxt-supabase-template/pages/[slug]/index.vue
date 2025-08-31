@@ -17,20 +17,6 @@
                         </template>
                     </Suspense>
                 </div>
-                <div class="flex w-full justify-center gap-3 mt-12">
-                    <div v-if="h.prevCategory" class="text-4xl pb-2 hover:border-b border-black">
-                        <NuxtLink :to="'/' + h.prevCategory.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + h.prevCategory.name" class="flex gap-2 items-center">
-                            <Icon name="ci:chevron-left" size="2.5rem" />
-                        </NuxtLink>
-                    </div>
-                    <div v-else></div>
-                    <div v-if="h.nextCategory" class="text-4xl pb-2 hover:border-b border-black box-border">
-                        <NuxtLink :to="'/' + h.nextCategory.slug" :aria-label="'Zobacz zdjęcia z kategorii ' + h.nextCategory.name" class="flex gap-2 items-center">
-                            <Icon name="ci:chevron-right" size="2.5rem" />
-                        </NuxtLink>
-                    </div>
-                    <div v-else></div>
-                </div>
             </div>
         </PageContent>
     </div>
@@ -47,8 +33,6 @@
 
     const h = reactive({
         category: null,
-        nextCategory: null,
-        prevCategory: null,
     })
 
     const route = useRoute();
@@ -65,14 +49,53 @@
                 fatal: true
             })
         }
-        h.nextCategory = categoriesStore.getNextCategory();
-        h.prevCategory = categoriesStore.getPreviousCategory();
         h.category = categoriesStore.currentCategory;
-        useSetSeoData({
-            title: h.category.name,
-            description: `Portfolio studia fotograficznego Mili Studio (Kraków). Zdjęcia z kategorii ${h.category.name}.`,
-            image: `https://strapi.lichtanski.com${h.category.img.url}`,
-            url: `/${h.category.slug}`,
+        useHead({
+            title: `Mili.Studio - ${h.category.name}`,
+            meta: [
+                { name: 'description', content: `Portfolio studia fotograficznego Mili.studio. Zdjęcia z kategorii ${h.category.name}.` },
+                { property: 'og:title', content: `Mili.Studio - ${h.category.name}` },
+                { property: 'og:description', content: `Portfolio studia fotograficznego Mili.studio. Zdjęcia z kategorii ${h.category.name}.` },
+                { property: 'og:image', content: `https://strapi.lichtanski.com${h.category.img.url}` },
+                { property: 'og:type', content: 'website' },
+                { property: 'og:url', content: `https://lichtanski.com/${h.category.slug}` },
+
+                { name: 'twitter:card', content: 'summary_large_image' },
+                { name: 'twitter:title', content: `Mili.Studio - ${h.category.name}` },
+                { name: 'twitter:description', content: `Portfolio studia fotograficznego Mili.studio. Zdjęcia z kategorii ${h.category.name}.` },
+                { name: 'twitter:image', content: `https://strapi.lichtanski.com${h.category.img.url}` }
+            ],
+            htmlAttrs: {
+                lang: 'pl'
+            },
+            script: [
+                {
+                type: 'application/ld+json',
+                children: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "CollectionPage",
+                    "name": `Mili.Studio - ${h.category.name}`,
+                    "description": `Portfolio studia fotograficznego Mili.studio. Zdjęcia z kategorii ${h.category.name}.`,
+                    "url": `https://lichtanski.com/${h.category.slug}`,
+                    "image": `https://strapi.lichtanski.com${h.category.img.url}`,
+                    "hasPart": {
+                        "@type": "ItemList",
+                        "name": `Galeria zdjęć z kategorii ${h.category.name}`,
+                        "itemListElement": (h.category.photos || []).map((photo, index) => ({
+                            "@type": "ImageObject",
+                            "position": index + 1,
+                            "name": photo.name || `${h.category.name} - zdjęcie ${index + 1}`,
+                            "contentUrl": `https://strapi.lichtanski.com${photo.url}`,
+                        }))
+                    },
+                    "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "Mili.studio",
+                    "url": "https://lichtanski.com"
+                    }
+                })
+                }
+            ]
         })
     })
 </script>

@@ -38,26 +38,13 @@ export const useCategoriesStore = defineStore('categories', {
             this.categoriesPending = false
         }
         },
-
         setCurrentCategory(slug) {
-            const idx = this.categories.findIndex(c => c.slug === slug)
-            if(idx !== null) {
-                this.currentCategory = this.categories[idx];
-                return true;
+            const category = this.categories.find(c => c.slug === slug)
+            if (category) {
+                this.currentCategory = category
+                return true
             }
             return false;
-        },
-
-        getNextCategory() {
-            if (!this.currentCategory) return null
-            const idx = this.categories.findIndex(c => c.slug === this.currentCategory.slug)
-            return this.categories[(idx + 1) % this.categories.length]
-        },
-
-        getPreviousCategory() {
-            if (!this.currentCategory) return null
-            const idx = this.categories.findIndex(c => c.slug === this.currentCategory.slug)
-            return this.categories[(idx - 1 + this.categories.length) % this.categories.length]
         },
     },
     })

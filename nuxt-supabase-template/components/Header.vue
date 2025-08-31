@@ -14,7 +14,7 @@
                     }"
                     :duration="500">
                     <NuxtLink to="/" aria-label="Zobacz stronę główną Milistudio">
-                        <img class="h-7" src="/img/mili.png" alt="mili logo"
+                        <img class="h-7" src="/img/mili_blue_dot.png" alt="mili logo"
                             v-motion
                             :initial="{
                                 scale: 0.7,
@@ -50,7 +50,7 @@
                                 </ul>
                             </li>
                         </NuxtLink>
-                        <NuxtLink to="/about" aria-label="Zobacz informacje na temat Milistudio">
+                        <NuxtLink to="/o-mnie" aria-label="Zobacz informacje na temat Milistudio">
                             <li class="py-1 px-2">
                                 <p>o mnie</p>
                             </li>
@@ -96,8 +96,8 @@
                                 }"
                                 :duration="500"
                                 :delay="100">
-                            <NuxtLink to="/about" aria-label="Zobacz informacje na temat Milistudio" @click="toggleMenu">
-                                <p>o nas</p>
+                            <NuxtLink to="/o-mnie" aria-label="Zobacz informacje na temat Milistudio" @click="toggleMenu">
+                                <p>o mnie</p>
                             </NuxtLink>
                         </li>
                         <li v-for="(category, index) in categories" :key="category.id" class=""

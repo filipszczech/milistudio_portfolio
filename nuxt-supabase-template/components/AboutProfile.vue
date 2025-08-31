@@ -1,16 +1,23 @@
 <template>
     <div v-if="h.profile">
-        <NuxtImg format="webp" placeholder :src="'https://strapi.lichtanski.com' + h.profile.img.url" alt="Michał Lichtański - zdjęcie profilowe" class="w-full mt-6 lg:mt-0 object-cover max-w-[32rem] mx-auto mb-6" />
-        <h1 class="text-4xl md:text-6xl font-semibold text-center mt-6 md:mt-12"
+        <NuxtImg format="webp" placeholder :src="'https://strapi.lichtanski.com' + h.profile.img.url" alt="Michał Lichtański - zdjęcie profilowe" class="w-full mt-6 lg:mt-0 object-cover max-w-[27rem] mx-auto mb-6" />
+        <!-- <h1 class="text-4xl md:text-6xl font-semibold text-center mt-6 md:mt-9"
             v-motion
             :initial="{ opacity: 0, y: 20 }"
             :visibleOnce="{ opacity: 1, y: 0 }"
             :duration="600" 
             :delay="200"
-        >milistudio.</h1>
-        <h2 class="text-center text-lg lg:text-xl max-w-2xl my-6">{{ h.profile.desc }}</h2>
-        <div class="flex flex-col gap-6 justify-center items-center mt-6md:mt-12">
-            <h2 class="text-4xl md:text-6xl font-semibold text-center">linki</h2>
+        >mili.studio</h1> -->
+        <NuxtImg 
+            v-motion
+            :initial="{ opacity: 0, y: 20 }"
+            :visibleOnce="{ opacity: 1, y: 0 }"
+            :duration="600" 
+            :delay="200"
+            format="png" placeholder src="/img/mili_blue_dot.png" alt="Mili.studio - logo" class="h-7 sm:h-9 my-8 mx-auto" />
+        <h2 class="text-center text-lg lg:text-xl max-w-xl my-6">{{ h.profile.desc }}</h2>
+        <div class="flex flex-col gap-6 justify-center items-center mt-6 md:mt-12">
+            <!-- <h2 class="text-4xl md:text-6xl font-semibold text-center">linki</h2> -->
             <a :href="h.profile.ig_link" target="_blank" rel="noopener" aria-label="Michał Lichtański Instagram Profile" class="flex gap-2 items-center text-lg lg:text-xl pb-1 border-b border-black w-fit"
                 v-motion
                 :initial="{ opacity: 0, y: 20 }"
